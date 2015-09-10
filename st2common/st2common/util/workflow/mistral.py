@@ -208,8 +208,9 @@ def transform_definition(definition):
     # Transform tasks
     if is_workbook:
         for workflow_name, workflow_spec in six.iteritems(spec.get('workflows', {})):
-            for task_name, task_spec in six.iteritems(workflow_spec.get('tasks')):
-                _transform_action(task_name, task_spec)
+            if 'tasks' in workflow_spec:
+                for task_name, task_spec in six.iteritems(workflow_spec.get('tasks')):
+                    _transform_action(task_name, task_spec)
     else:
         for key, value in six.iteritems(spec):
             if 'tasks' in value:
